@@ -1,0 +1,30 @@
+nameOverride: cartservice
+
+image:
+  repository: us-central1-docker.pkg.dev/google-samples/microservices-demo/cartservice
+  tag: v0.10.4
+
+containerPort: 7070
+
+service:
+  type: ClusterIP
+  portName: grpc
+  port: 7070
+
+env:
+  - name: REDIS_ADDR
+    value: "redis-cart:6379"
+
+readinessProbe:
+  enabled: true
+  type: grpc
+  port: 7070
+  initialDelaySeconds: 15
+
+livenessProbe:
+  enabled: true
+  type: grpc
+  port: 7070
+  initialDelaySeconds: 15
+  periodSeconds: 10
+
