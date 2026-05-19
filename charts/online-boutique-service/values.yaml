@@ -1,0 +1,49 @@
+replicaCount: 2
+
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: ""
+  tag: "v0.10.4"
+  pullPolicy: IfNotPresent
+
+containerPort: 80
+
+service:
+  type: ClusterIP
+  portName: http
+  port: 80
+
+
+serviceAccount:
+  create: false
+  name: ""
+
+env: []
+
+readinessProbe:
+  enabled: false
+  type: grpc   
+  port: 0
+  path: ""
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 6
+
+livenessProbe:
+  enabled: false
+  type: grpc   # grpc | http
+  port: 0
+  path: ""
+  initialDelaySeconds: 20
+  periodSeconds: 20
+  timeoutSeconds: 2
+  failureThreshold: 6
+
+resources: {}
+
+autoscaling:
+  enabled: false
+
